@@ -39,7 +39,6 @@ struct Index {
           if (event)
           {
             const requestUrl = event.request.getRequestUrl();
-            const mimeTypeStruct = new MimeTypeStruct();
             if(requestUrl.startsWith(this.fakePath))
             {
               let  path = requestUrl.replace(this.fakePath,'');
@@ -52,7 +51,7 @@ struct Index {
               this.responseResource.setResponseEncoding('utf-8');
               let parts = path.split(".");
               let fileType = parts.pop() ?? "";
-              let mimeType = mimeTypeStruct.getMimeType(fileType);
+              let mimeType = this.mimeTypeStruct.getMimeType(fileType);
               this.responseResource.setResponseMimeType(mimeType);
               this.responseResource.setResponseCode(200);
               this.responseResource.setReasonMessage('OK');

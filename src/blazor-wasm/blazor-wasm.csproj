@@ -17,7 +17,6 @@
 			<staticFiles Include="$(PublishDir)wwwroot\**\*.*"/>
 		</ItemGroup>
 		<RemoveDir Directories="..\hybrid\entry\src\main\resources\rawfile" />
-		<MakeDir Directories="..\hybrid\entry\src\main\resources\rawfile" />
 		<Copy SourceFiles="@(staticFiles)" DestinationFolder="..\hybrid\entry\src\main\resources\rawfile\%(RecursiveDir)" SkipUnchangedFiles="True" />
 	</Target>
 </Project>

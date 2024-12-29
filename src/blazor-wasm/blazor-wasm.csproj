@@ -11,14 +11,13 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
 	</ItemGroup>
+	
 	<Target Name="CopyFilesAfterBuild" AfterTargets="Build">
 		<ItemGroup>
-			<!-- Because this ItemGroup is inside the target, this will enumerate
-                 all files just before calling Copy. If the ItemGroup were outside
-                 the target , it would enumerate the files during evaluation, before
-                 the build starts, which may miss files created during the build. -->
 			<staticFiles Include="$(PublishDir)wwwroot\**\*.*"/>
 		</ItemGroup>
+		<RemoveDir Directories="..\hybrid\entry\src\main\resources\rawfile" />
+		<MakeDir Directories="..\hybrid\entry\src\main\resources\rawfile" />
 		<Copy SourceFiles="@(staticFiles)" DestinationFolder="..\hybrid\entry\src\main\resources\rawfile\%(RecursiveDir)" SkipUnchangedFiles="True" />
 	</Target>
 </Project>

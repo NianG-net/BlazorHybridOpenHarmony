@@ -1,5 +1,6 @@
 import webview from '@ohos.web.webview';
 import socket from '@ohos.net.socket';
+import { textProcessing } from '@kit.NaturalLanguageKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 class MimeTypeStruct {

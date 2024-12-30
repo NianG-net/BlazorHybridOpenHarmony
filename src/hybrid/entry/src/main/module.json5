@@ -12,8 +12,10 @@
     "pages": "$profile:main_pages",
     "requestPermissions": [
       {
+
         "name": "ohos.permission.INTERNET"
       }
+
     ],
     "abilities": [
       {

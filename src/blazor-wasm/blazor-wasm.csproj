@@ -10,13 +10,18 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
+		<PackageReference Include="MudBlazor" Version="7.15.0" />
 	</ItemGroup>
-	
+
+	<Target Name="RemoveLastBuild" BeforeTargets="Build">
+		<RemoveDir Directories="$(PublishDir)wwwroot" />
+	</Target>
 	<Target Name="CopyFilesAfterBuild" AfterTargets="Build">
 		<ItemGroup>
-			<staticFiles Include="$(PublishDir)wwwroot\**\*.*"/>
+			<staticFiles Include="$(PublishDir)wwwroot\**\*.*" />
 		</ItemGroup>
 		<RemoveDir Directories="..\hybrid\entry\src\main\resources\rawfile" />
+
 		<Copy SourceFiles="@(staticFiles)" DestinationFolder="..\hybrid\entry\src\main\resources\rawfile\%(RecursiveDir)" SkipUnchangedFiles="True" />
 	</Target>
 </Project>

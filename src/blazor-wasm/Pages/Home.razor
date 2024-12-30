@@ -7,20 +7,32 @@
 
 
 <h2>Welcome to your new BLAZOR app. </h2>
-<input @bind-value="@Address" />
-<input @bind-value="@Port" />
-<button @onclick="@Ping"> Send </button>
+@* <MudTextField Validation="Variant.Outlined" @bind-value="@Address" />
+<MudNumericField Validation="Variant.Outlined" @bind-value="@Port" /> *@
+
+<MudButton OnClick="Talk"  Class="mt-1" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mic" IconColor="Color.Primary">
+    @(TalkStart ? "开始录音" : "停止录音")
+
+</MudButton>
+@* <MudButton Color="Color.Primary" Variant="Variant.Filled" @ontouchend="@Ping" @onclick="@Ping"> Send </MudButton> *@
 <script>
 
     window.ping = (address,port,pingMessage) =>
     {
-        tcpSocket.connect(address,port);
-        tcpSocket.sendData(pingMessage);
-        tcpSocket.close();
+    tcpSocket.connect(address,port);
+    tcpSocket.sendData(pingMessage);
+    tcpSocket.close();
     };
 </script>
 @code
 {
+    bool TalkStart { get; set; } = true;
+    Task Talk()
+    {
+        TalkStart = !TalkStart;
+        return Task.CompletedTask;
+
+    }
     string? Address { get; set; } = "192.168.0.104";
     int Port { get; set; } = 2100;
     async Task Ping()
